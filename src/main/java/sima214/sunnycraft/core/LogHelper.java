@@ -1,7 +1,9 @@
 package sima214.sunnycraft.core;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper {
@@ -32,5 +34,9 @@ public class LogHelper {
 	public static void all(Object obj)
 	{
 		log(Level.ALL, obj);
+	}
+	public static void fatal(Object obj, Exception e) {
+		LogManager.getLogger("sunnycraft").fatal(obj, e);
+		FMLCommonHandler.instance().exitJava(1, false);
 	}
 }

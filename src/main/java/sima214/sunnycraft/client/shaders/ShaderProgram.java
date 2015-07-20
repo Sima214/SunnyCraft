@@ -4,12 +4,17 @@ import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.GL11;
 
 import sima214.sunnycraft.core.LogHelper;
+import sima214.sunnycraft.core.utils.IOUtils;
 
 public class ShaderProgram {
 	int id;
 
-	public void init(FragmentShaderObject frag,VertexShaderObject vert)
+	public void init(String basename)
 	{
+		FragmentShaderObject frag=new FragmentShaderObject();
+		VertexShaderObject vert=new VertexShaderObject();
+		frag.init((IOUtils.loadText(basename+".frag")));
+		vert.init((IOUtils.loadText(basename+".vert")));
 		frag.compile();
 		vert.compile();
 		id=ARBShaderObjects.glCreateProgramObjectARB();

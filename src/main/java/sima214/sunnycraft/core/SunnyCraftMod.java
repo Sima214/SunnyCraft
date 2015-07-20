@@ -1,8 +1,7 @@
 package sima214.sunnycraft.core;
 
-import sima214.sunnycraft.client.Resourses;
 import sima214.sunnycraft.entities.SunEntity;
-import sima214.sunnycraft.items.SunSpawner;
+import sima214.sunnycraft.items.DebugItem;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -18,7 +17,7 @@ public class SunnyCraftMod {
 	@SidedProxy(clientSide="sima214.sunnycraft.client.ClientProxy",serverSide="sima214.sunnycraft.core.CommonProxy")
 	public static CommonProxy proxy;
 	//Objects to be registered
-	public static final SunSpawner sunSpawner=new SunSpawner();
+	public static final DebugItem sunSpawner=new DebugItem();
 	//Registration-Startup events
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event)
@@ -42,7 +41,6 @@ public class SunnyCraftMod {
 	{
 		LogHelper.info("Start of postinit");
 		proxy.init();
-		LogHelper.trace(Resourses.getModel().length);
 		LogHelper.info("End of postinit");
 	}
 
