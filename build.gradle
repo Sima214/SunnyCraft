@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+repositories {
+		maven { 
+			name "MobiusMaven"
+			url "http://mobiusstrip.eu/maven"
+		}
+		maven {  
+			name 'CBMaven'
+			url "http://chickenbones.net/maven/"
+		}
+}
+apply plugin: 'forge'
+//Load properties file
+ext.configFile = file "build.properties"
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+dependencies {
+    compile "codechicken:CodeChickenLib:${config.mcversion}-${config.CCLIB_version}:dev"
+    compile "codechicken:NotEnoughItems:${config.mcversion}-${config.NEI_version}:dev"
+    compile "codechicken:CodeChickenCore:${config.mcversion}-${config.CCC_version}:dev"
+    compile "mcp.mobius.waila:Waila:${config.WAILA_version}_${config.mcversion}:dev"
+}
+
+version = "[${config.mcversion}]-${config.version}."
+group= "sima214.sunnycraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Sunnycraft"
+
+minecraft {
+    println("${config.mcversion}-${config.forge_version}")
+    version = "${config.mcversion}-${config.forge_version}"
+    runDir = "runtime"
+}
+
+processResources
+{
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':config.version, 'mcversion':config.mcversion
+    }
+       // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

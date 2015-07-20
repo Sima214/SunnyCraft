@@ -1,0 +1,16 @@
+[
+{
+  "modid": "sunnycraft",
+  "name": "Sunny Craft",
+  "description": "A mod about sun power",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Sima214"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
