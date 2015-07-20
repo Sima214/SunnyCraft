@@ -1,12 +1,13 @@
 package sima214.sunnycraft.entities;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import sima214.sunnycraft.core.utils.SpecialEntity;
 
 public class SunEntity extends SpecialEntity {
-	private boolean isBoss;
+	boolean isBoss;
 	public SunEntity(World world) {
 		super(world);
 		this.setSize(getSizeByType(),getSizeByType());
@@ -25,6 +26,9 @@ public class SunEntity extends SpecialEntity {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		if(posY>=148) {
+			setDead();
+		}
 	};
 	@Override
 	public boolean attackEntityFrom(DamageSource dmg, float amount) {
@@ -33,10 +37,14 @@ public class SunEntity extends SpecialEntity {
 			setHealth(getHealth()-1);
 			setHitTimer(20);
 			try {
-				Vec3 vec = dmg.getEntity().getLookVec();
+				Entity at=dmg.getEntity();
+				Vec3 vec = at.getLookVec();
 				this.motionX=vec.xCoord;
 				this.motionY=vec.yCoord;
 				this.motionZ=vec.zCoord;
+				//if(at instanceof EntityPlayer) {
+				//	MotionHelper.provoke(at, 10);
+				//}
 			} catch (NullPointerException e) {}
 		}
 		return true;

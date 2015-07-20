@@ -13,6 +13,7 @@ public abstract class SpecialEntity extends Entity {
 	int hitTimer;
 	int health;
 	int deathTimer;
+	public WanderHelper MotionHelper=new WanderHelper(this);
 	public boolean isGoingToDie;
 	public SpecialEntity(World world) {
 		super(world);
@@ -30,7 +31,12 @@ public abstract class SpecialEntity extends Entity {
 				this.motionY*=0.5f;
 				this.motionZ*=0.5f;
 			}
-			this.moveEntity(this.motionX/4.0,this.motionY/4.0,this.motionZ/4.0);
+			if(!isGoingToDie) {
+				this.moveEntity(this.motionX/10.0,this.motionY/10.0,this.motionZ/10.0);
+			}
+			if(hitTimer<=0){
+				MotionHelper.update();
+			}
 		}
 		//LogHelper.info((worldObj.isRemote?"End Client:":"End Server")+getHealth()+" "+getHitTimer()+" "+getDeathTimer());
 	}
