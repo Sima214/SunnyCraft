@@ -2,17 +2,12 @@ package sima214.core.client;
 
 import java.util.ArrayList;
 
+import net.minecraftforge.client.event.TextureStitchEvent;
 import sima214.core.Logger;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ResourseReloader {
-	public static ResourseReloader reloadHandler;
-	private final ArrayList<IResourcePackChangeListener> registry = new ArrayList<IResourcePackChangeListener>();
-	public ResourseReloader() {
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+	private ArrayList<IResourcePackChangeListener> registry = new ArrayList<IResourcePackChangeListener>();
 	@SubscribeEvent//I could not find anything better.
 	public void onReload(TextureStitchEvent.Post ev){
 		if(ev.map.getTextureType()==1){
@@ -23,9 +18,6 @@ public class ResourseReloader {
 		}
 	}
 	public static void register(IResourcePackChangeListener obj){
-		reloadHandler.registry.add(obj);
-	}
-	public static void init() {
-		reloadHandler=new ResourseReloader();
+		ClientProxy.reloadHandler.registry.add(obj);
 	}
 }
