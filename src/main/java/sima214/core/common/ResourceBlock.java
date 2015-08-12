@@ -16,7 +16,7 @@ public class ResourceBlock extends Block {
 	public ResourceBlock(){
 		this(Material.sponge);
 	}
-	public ResourceBlock(float[] bounds,float hardness,float resistance,String name,String textureName,SoundType sound,String oredict,String modid){
+	public ResourceBlock(float[] bounds,float hardness,float resistance,String name,String textureName,SoundType sound,String modid){
 		this();
 		this.modid=modid;
 		this.setResistance(resistance).setHardness(hardness).setBlockName(name).setBlockTextureName(textureName).setStepSound(sound);
@@ -24,9 +24,6 @@ public class ResourceBlock extends Block {
 		this.setBlockBounds(bounds[0],bounds[1],bounds[2],bounds[3],bounds[4],bounds[5]);
 		nonCube=true;
 		setLightOpacity(0);
-		}
-		if(oredict!=null){
-			OreDictionary.registerOre(oredict, this);
 		}
 	}
 	@Override
@@ -41,5 +38,8 @@ public class ResourceBlock extends Block {
 	@Override
 	public boolean isOpaqueCube() {
 		return !nonCube;
+	}
+	public void registerToOreDict(String oreDict){
+		OreDictionary.registerOre(oreDict, this);
 	}
 }

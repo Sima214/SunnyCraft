@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.util.EnumChatFormatting;
 import sima214.core.common.CommonProxy;
 import sima214.core.common.ResourceBlock;
 import sima214.core.common.ResourceItem;
@@ -22,8 +23,8 @@ public class Main {
 	@SidedProxy(clientSide="sima214.core.client.ClientProxy",serverSide="sima214.core.common.CommonProxy")
 	public static CommonProxy proxy;
 	private ArrayList<ConfigHelper> configs=new ArrayList<ConfigHelper>(2);
-	public ResourceBlock testBlock=new ResourceBlock(new float[]{0f,0f,0f,1f,0.25f,1f},0f, 1f, "tester", "random_bitmap", Block.soundTypeGrass, "blockRandom", Constants.CORE_ID);
-	public ResourceItem testItem=new ResourceItem(16, EnumRarity.epic, "testing", "random_item", "glowstone", Constants.CORE_ID);
+	public ResourceBlock testBlock=new ResourceBlock(new float[]{0f,0f,0f,1f,0.25f,1f},0f, 1f, "tester", "random_bitmap", Block.soundTypeGrass, Constants.CORE_ID);
+	public ResourceItem testItem=new ResourceItem(16, EnumRarity.uncommon, "testing", "random_item", Constants.CORE_ID, new String[]{EnumChatFormatting.GOLD+"I am golden, right?"});
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event)
 	{
@@ -37,6 +38,7 @@ public class Main {
 	{
 		GameRegistry.registerBlock(testBlock,testBlock.getUnlocalizedName());
 		GameRegistry.registerItem(testItem, testItem.getUnlocalizedName());
+		testItem.addToOreDict("stickWood");
 	}
 
 	@Mod.EventHandler
