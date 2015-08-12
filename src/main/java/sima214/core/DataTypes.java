@@ -22,7 +22,7 @@ public enum DataTypes {
 		return bitsPer;
 	}
 	/**
-	 * @return The amount of bits this primitive data type uses in memory
+	 * @return The amount of bytes this primitive data type uses in memory
 	 */
 	public byte getBytes() {
 		return (byte) (bitsPer/8);
