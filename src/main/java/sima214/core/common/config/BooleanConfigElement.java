@@ -9,12 +9,12 @@ public class BooleanConfigElement implements IConfigElement {
 		this.key=key;
 		this.defaultValue=defaultValue;
 	}
-public BooleanConfigElement(String category,String key,String comment,boolean defaultValue) {
-	this.category=category;
-	this.key=key;
-	this.defaultValue=defaultValue;
-	this.comment=comment+"[Default value: "+Boolean.toString(defaultValue)+"]";
-}
+	public BooleanConfigElement(String category,String key,String comment,boolean defaultValue) {
+		this.category=category;
+		this.key=key;
+		this.defaultValue=defaultValue;
+		this.comment=comment+"[Default value: "+Boolean.toString(defaultValue)+"]";
+	}
 	public String category;
 	public String key;
 	public boolean defaultValue;

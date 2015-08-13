@@ -21,13 +21,13 @@ public class ResourceBlock extends Block {
 		this.modid=modid;
 		this.setResistance(resistance).setHardness(hardness).setBlockName(name).setBlockTextureName(textureName).setStepSound(sound);
 		if(bounds!=null){
-		this.setBlockBounds(bounds[0],bounds[1],bounds[2],bounds[3],bounds[4],bounds[5]);
-		nonCube=true;
-		setLightOpacity(0);
+			this.setBlockBounds(bounds[0],bounds[1],bounds[2],bounds[3],bounds[4],bounds[5]);
+			nonCube=true;
+			setLightOpacity(0);
 		}
 	}
 	@Override
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		blockIcon=iconRegister.registerIcon(modid+":"+this.textureName);
 	}

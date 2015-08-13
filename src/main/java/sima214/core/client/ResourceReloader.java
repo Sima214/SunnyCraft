@@ -6,7 +6,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import sima214.core.Logger;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class ResourseReloader {
+public class ResourceReloader {
 	private ArrayList<IResourcePackChangeListener> registry = new ArrayList<IResourcePackChangeListener>();
 	@SubscribeEvent//I could not find anything better.
 	public void onReload(TextureStitchEvent.Post ev){

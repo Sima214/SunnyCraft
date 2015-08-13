@@ -23,6 +23,8 @@ public class ConfigHelper {
 		for(IConfigElement curElement:elements){
 			curElement.load(forgeConfig);
 		}
-		if(forgeConfig.hasChanged())forgeConfig.save();
+		if(forgeConfig.hasChanged()) {
+			forgeConfig.save();
+		}
 	}
 }

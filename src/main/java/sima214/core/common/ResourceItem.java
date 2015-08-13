@@ -26,7 +26,7 @@ public class ResourceItem extends Item {
 		this.tooltip=tooltip;
 	}
 	@Override
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
 		itemIcon=iconRegister.registerIcon(modid+":"+this.iconString);
 	}
@@ -42,7 +42,7 @@ public class ResourceItem extends Item {
 	}
 	public void addInfoToList(List<String> infoList,String[] info){
 		for(String curLine:info){
-		infoList.add(curLine);
+			infoList.add(curLine);
 		}
 	}
 	public void addToOreDict(String oreDict) {

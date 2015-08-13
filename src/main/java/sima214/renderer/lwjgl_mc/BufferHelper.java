@@ -12,7 +12,7 @@ public class BufferHelper{
 	protected int usage=GL15.GL_STATIC_DRAW;
 	protected int target=GL15.GL_ARRAY_BUFFER;
 	protected boolean ready;
-	protected int size;
+	protected int size;//Total amount of elements in the buffer(not bytes)
 	public BufferHelper(int usage,int target) {
 		this.usage=usage;
 		this.target=target;
@@ -40,6 +40,18 @@ public class BufferHelper{
 	 */
 	public void setTarget(int target) {
 		this.target = target;
+	}
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
 	}
 	/**
 	 * @return true if this buffer is ready to be used(has data it can render)
@@ -77,7 +89,7 @@ public class BufferHelper{
 		GL15.glBufferData(target, buffer, usage);
 		unbind();
 		ready=true;
-		}
+	}
 	public void load(int initialSize,DataTypes type){
 		genBind();
 		size=initialSize;
@@ -92,7 +104,7 @@ public class BufferHelper{
 		GL15.glBindBuffer(target, id);
 	}
 	/**
-	 * Unbinds the currently bound buffer 
+	 * Unbinds the currently bound buffer
 	 */
 	public void unbind(){
 		GL15.glBindBuffer(target, 0);
@@ -100,5 +112,5 @@ public class BufferHelper{
 	public static void unbind(int target){
 		GL15.glBindBuffer(target, 0);
 	}
-	
+
 }
