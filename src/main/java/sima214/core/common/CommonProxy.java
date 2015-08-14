@@ -1,5 +1,9 @@
 package sima214.core.common;
 
-public class CommonProxy {
+public abstract class CommonProxy {
+
+	public abstract void init();
+
+	public abstract void post();
 
 }

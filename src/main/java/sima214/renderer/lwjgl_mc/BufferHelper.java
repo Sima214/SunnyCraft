@@ -9,7 +9,7 @@ import sima214.core.DataTypes;
 
 public class BufferHelper{
 	protected int id;//Internal name/id used by the OpenGl implementation
-	protected int usage=GL15.GL_STATIC_DRAW;
+	protected int usage=GL15.GL_STATIC_DRAW;//"Provide" the most commonly used ones because I always confuse their names.
 	protected int target=GL15.GL_ARRAY_BUFFER;
 	protected boolean ready;
 	protected int size;//Total amount of elements in the buffer(not bytes)
@@ -75,7 +75,7 @@ public class BufferHelper{
 	// Start of main functions
 	//************************
 	public void reset(DataTypes type){
-		GL15.glBufferData(target, type.getBytes()*size, usage);//TODO Bit shift?
+		GL15.glBufferData(target, type.getBytes()*size, usage);//TODO Bit shift? Also make it so it respects different dataTypes in a vbo
 		ready=false;
 	}
 	public void delete(){
