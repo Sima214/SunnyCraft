@@ -2,8 +2,6 @@ package sima214.renderer.lwjgl_mc;
 
 import org.lwjgl.opengl.GL11;
 
-import sima214.core.Logger;
-
 public class InterleavedBufferHelper extends BufferHelper {
 
 	protected InterleavedData[] interleaved;
@@ -17,13 +15,11 @@ public class InterleavedBufferHelper extends BufferHelper {
 		byte previous=0;
 		byte totalNumOfElements=0;
 		for(InterleavedData data:interleaved){
-			Logger.debug(previous+" bytes offset");
 			previous=data.bake(previous);
 			totalNumOfElements+=data.vectorSize;
 		}
 		stride=previous;
 		EndIndex=size/totalNumOfElements;
-		Logger.debug("Stride: "+stride+" ,Total Indexes: "+EndIndex);
 	}
 	public void drawTriangles(){
 		if(!ready)return;
