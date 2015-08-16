@@ -64,7 +64,7 @@ public class VBOLoader implements IResourcePackChangeListener {
 		} catch (Exception e) {
 			Logger.exception("Error while loading a vbo", e);
 		}
-}
+	}
 	private void setTypeByString(String substring) {
 		for(SmodelFormatType type:types){
 			if(substring.equals(type.match)){
