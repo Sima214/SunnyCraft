@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.OpenGLException;
 
-import sima214.core.Main;
+import sima214.core.SimaCoreMain;
 import sima214.core.client.IOUtils;
 import sima214.core.client.IResourcePackChangeListener;
 
@@ -22,7 +22,7 @@ public class ShaderProgram implements IResourcePackChangeListener {
 	private final Shader frag=new Shader(ShaderTypes.FRAGMENT);
 	public ShaderProgram(ResourceLocation loc) {
 		this.location=loc;
-		Main.registerPostClientLoad(this);
+		SimaCoreMain.registerPostClientLoad(this);
 	}
 	public void addUniform(String name){
 		uniforms.put(name, new UniformHelper(this));

@@ -12,9 +12,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Constants.CORE_ID,name=Constants.CORE_NAME,version=Constants.CORE_VERSION)
-public class Main {
+public class SimaCoreMain {
+	public static final String dependStr="required-after:"+Constants.CORE_ID+"@[" + Constants.CORE_VERSION + ",)";
 	@Mod.Instance(Constants.CORE_ID)
-	public static Main instance;
+	public static SimaCoreMain instance;
 	@SidedProxy(clientSide="sima214.core.client.ClientProxy",serverSide="sima214.core.common.CommonProxy")
 	public static CommonProxy proxy;
 	private ArrayList<ConfigHelper> configs=new ArrayList<ConfigHelper>(2);
