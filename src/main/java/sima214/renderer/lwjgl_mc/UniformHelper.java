@@ -3,7 +3,7 @@ package sima214.renderer.lwjgl_mc;
 import org.lwjgl.opengl.GL20;
 
 public class UniformHelper {
-	
+
 	private ShaderProgram program;
 	private int id;
 	/**
