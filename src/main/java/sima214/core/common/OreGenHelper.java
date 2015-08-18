@@ -19,8 +19,9 @@ public class OreGenHelper implements IWorldGenerator{
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		Logger.debug(chunkX+" : "+chunkZ);
+		int[] chunkCoords={chunkX,chunkZ};
 		for(WorldGenSimple wgs:simple){
-			wgs.generate(random,chunkX,chunkZ,world,chunkGenerator,chunkProvider);
+			wgs.generate(random,chunkCoords,world,chunkGenerator,chunkProvider);
 		}
 	}
 	public void prepareConfig() {
