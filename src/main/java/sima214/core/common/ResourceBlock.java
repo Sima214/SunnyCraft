@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ResourceBlock extends Block {
 	String modid;
 	protected boolean nonCube;
+	public String unlocalizedName;
 	protected ResourceBlock(Material mat) {
 		super(mat);
 	}

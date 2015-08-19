@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import sima214.core.Logger;
 import sima214.core.common.config.ConfigHelper;
+import sima214.core.common.config.IConfigElement;
 import cpw.mods.fml.common.IWorldGenerator;
 /*
  * NOTE YOU MUST REGISTER STUFF HERE AS EARLY AS CONSTRUCTION(before simacore gets pre-init)
@@ -25,7 +26,8 @@ public class OreGenHelper implements IWorldGenerator{
 		}
 	}
 	public void prepareConfig() {
-		simpleCfg.addElements((WorldGenSimple[]) simple.toArray());
+		IConfigElement[] elements=simple.toArray(new IConfigElement[simple.size()]);
+		simpleCfg.addElements(elements);
 	}
 	public void add(WorldGenSimple reg){
 		simple.add(reg);
