@@ -14,11 +14,8 @@ public class ResourceBlock extends Block {
 	protected ResourceBlock(Material mat) {
 		super(mat);
 	}
-	public ResourceBlock(){
-		this(Material.sponge);
-	}
-	public ResourceBlock(float[] bounds,float hardness,float resistance,String name,String textureName,SoundType sound,String modid){
-		this();
+	public ResourceBlock(float[] bounds,float hardness,float resistance,String name,String textureName,SoundType sound,String modid, Material mat){
+		this(mat);
 		this.modid=modid;
 		this.setResistance(resistance).setHardness(hardness).setBlockName(name).setBlockTextureName(textureName).setStepSound(sound);
 		if(bounds!=null){
