@@ -29,6 +29,7 @@ public class SunnyCraftMain {
 	public void init(FMLInitializationEvent event)
 	{
 		Registry.init();
+		Recipes.init(event);
 	}
 
 	@Mod.EventHandler

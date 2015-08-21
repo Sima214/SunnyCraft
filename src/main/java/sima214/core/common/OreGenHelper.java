@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import sima214.core.Logger;
 import sima214.core.common.config.ConfigHelper;
 import sima214.core.common.config.IConfigElement;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -19,7 +18,7 @@ public class OreGenHelper implements IWorldGenerator{
 	}
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		Logger.debug(chunkX+" : "+chunkZ);
+		//Logger.debug(chunkX+" : "+chunkZ);
 		int[] chunkCoords={chunkX,chunkZ};
 		for(WorldGenSimple wgs:simple){
 			wgs.generate(random,chunkCoords,world,chunkGenerator,chunkProvider);
