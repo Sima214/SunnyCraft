@@ -37,6 +37,6 @@ public class LavaOre extends ResourceBlock {
 	@Override
 	protected boolean canSilkHarvest() {
 		return true;
-		
+
 	}
 }

@@ -38,7 +38,8 @@ public class ResourceItem extends Item {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer,@SuppressWarnings("rawtypes") List infoList, boolean b) {
-		addInfoToList(infoList, tooltip);
+		if(tooltip!=null){
+			addInfoToList(infoList, tooltip);}
 	}
 	public void addInfoToList(List<String> infoList,String[] info){
 		for(String curLine:info){
