@@ -1,4 +1,4 @@
-package sima214.sunnycraft.common.blocks;
+package sima214.sunnycraft.common.handlers;
 
 import sima214.sunnycraft.common.items.PortableDeepStorageUnit;
 import net.minecraft.inventory.InventoryCrafting;
@@ -12,35 +12,55 @@ public class PortableDsuCrafter implements IRecipe {
 
 	@Override
 	public boolean matches(InventoryCrafting crafting, World world) {
-		boolean resultDSU = false;
-		boolean resultBlock=false;
+		boolean hasPDSU=false;
+		ItemBlock stored = null;
+		Item inTable = null;
 		for(int i=0;i<crafting.getSizeInventory();i++){
 			ItemStack curStack=crafting.getStackInSlot(i);
+			if(curStack==null){
+				continue;
+			}
 			Item item=curStack.getItem();
 			if(item instanceof PortableDeepStorageUnit){
-				if(resultDSU){
+				if(stored!=null)
 					return false;
-				}
-				resultDSU=true;
+				hasPDSU=true;
+				PortableDeepStorageUnit pdsu=(PortableDeepStorageUnit) item;
+				stored=pdsu.getStack(curStack);
 			}
 			else if(item instanceof ItemBlock){
-				if(resultBlock){
+				if(inTable!=null)
 					return false;
-				}
-				resultBlock=true;
-			}
-
+				inTable=item;
+			} else
+				return false;
 		}
-		return resultDSU&&resultBlock;
+		return hasPDSU&& inTable != null && (stored==null||stored.equals(inTable));
 	}
 
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting crafting) {
+		ItemStack pdsu=null;
+		ItemStack blocks=null;
+		ItemStack EndStack;
 		for(int i=0;i<crafting.getSizeInventory();i++){
 			ItemStack curStack=crafting.getStackInSlot(i);
+			if(curStack == null){
+				continue;
+			}
 			Item item=curStack.getItem();
+			if(item instanceof PortableDeepStorageUnit){
+				pdsu=curStack;
+			}
+			else if(item instanceof ItemBlock){
+				blocks=curStack;
+			}
 		}
-		return null;
+		EndStack=pdsu.copy();
+		PortableDeepStorageUnit ItemPDSU = (PortableDeepStorageUnit) pdsu.getItem();
+		ItemPDSU.changeStoredAmount(EndStack, blocks.stackSize);
+		ItemPDSU.setStack(EndStack, blocks);
+		return EndStack;
 	}
 
 	@Override

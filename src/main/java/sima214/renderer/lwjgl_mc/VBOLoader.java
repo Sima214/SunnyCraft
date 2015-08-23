@@ -39,7 +39,7 @@ public class VBOLoader implements IResourcePackChangeListener {
 	public void onReload() {
 		curBufferOffset=0;
 		state=0;
-		BufferedReader reader;
+		BufferedReader reader = null;
 		try {
 			reader=IOUtils.getReaderByResource(location);
 			String curLine;
@@ -63,7 +63,9 @@ public class VBOLoader implements IResourcePackChangeListener {
 			Logger.info("Succesfully loaded the smodel");
 		} catch (Exception e) {
 			Logger.exception("Error while loading a vbo", e);
-		}
+		}//finally{
+		//	reader.close();
+		//}
 	}
 	private void setTypeByString(String substring) {
 		for(SmodelFormatType type:types){
