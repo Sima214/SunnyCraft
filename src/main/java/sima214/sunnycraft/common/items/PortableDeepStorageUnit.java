@@ -39,22 +39,33 @@ public class PortableDeepStorageUnit extends ResourceItem {
 			if(itemStack.stackTagCompound.hasKey(AMOUNT_TAG)&&getStoredAmount(itemStack)>0){
 				try {
 					ItemBlock item=getStack(itemStack);
-					if(item.onItemUse(new ItemStack(item),player,world,x,y,z,side,p_77648_8_,p_77648_9_,p_77648_10_)){
-						changeStoredAmount(itemStack, -1);
+					if(item.onItemUse(new ItemStack(item),player,world,x,y,z,side,p_77648_8_,p_77648_9_,p_77648_10_)&& (!player.capabilities.isCreativeMode)){
+						addToStoredAmount(itemStack, -1);
 					} else
 						return false;
 				} catch (Exception e) {
 					Logger.exception("An error occured while placing a block", e);
 				}
 			}
-			return false;}catch(NullPointerException e){
+			return false;
+			}
+			catch(NullPointerException e){
 				return false;
 			}
 	}
-	public void changeStoredAmount(ItemStack itemStack, int amount){//TODO don't steal when you are out of space
-		initializeTag(itemStack);
-		int finalValue = Math.min(getStoredAmount(itemStack)+amount,Registry.portDsu_size.value);
+	/*
+	 * @return returns the actual amount that went into the stack.
+	 */
+	public int addToStoredAmount(ItemStack itemStack, int amount){//TODO don't steal when you are out of space
+		int previous=getStoredAmount(itemStack);
+		int finalValue = Math.min(previous+amount,Registry.portDsu_size.value);
 		itemStack.stackTagCompound.setInteger(AMOUNT_TAG, finalValue);
+		return finalValue-previous;
+	}
+	public int changeStoredAmount(ItemStack itemStack, int newAmount){
+		int finalValue = Math.min(newAmount,Registry.portDsu_size.value);
+		itemStack.stackTagCompound.setInteger(AMOUNT_TAG, finalValue);
+		return finalValue;
 	}
 	public void setStack(ItemStack portDSU,ItemStack itemStack){
 		initializeTag(portDSU);
@@ -65,14 +76,16 @@ public class PortableDeepStorageUnit extends ResourceItem {
 	public ItemBlock getStack(ItemStack itemStack){
 		try{
 			return (ItemBlock) ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound).getItem();
-		}catch(Exception e){
+		}
+		catch(Exception e){//NullPointers and ClassCast just to be safe.
 			return null;
 		}
 	}
 	public int getStoredAmount(ItemStack itemStack){
 		try{
 			return itemStack.stackTagCompound.getInteger(AMOUNT_TAG);
-		}catch(NullPointerException e){
+		}
+		catch(NullPointerException e){
 			return 0;
 		}
 	}

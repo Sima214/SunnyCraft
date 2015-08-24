@@ -3,6 +3,7 @@ package sima214.sunnycraft;
 import sima214.core.Constants;
 import sima214.core.SimaCoreMain;
 import sima214.sunnycraft.common.CommonProxy;
+import sima214.sunnycraft.common.EventHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLConstructionEvent;
@@ -16,6 +17,7 @@ public class SunnyCraftMain {
 	public static SunnyCraftMain instance;
 	@SidedProxy(clientSide="sima214.sunnycraft.client.ClientProxy",serverSide="sima214.sunnycraft.common.CommonProxy")
 	public static CommonProxy proxy;
+	public EventHandler eventHandler;
 	@Mod.EventHandler
 	public void construct(FMLConstructionEvent event)
 	{	//We need that class to load up as soon as possible.
@@ -35,5 +37,6 @@ public class SunnyCraftMain {
 	@Mod.EventHandler
 	public void postinit(FMLPostInitializationEvent event)
 	{
+		eventHandler=new EventHandler();
 	}
 }

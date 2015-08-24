@@ -58,8 +58,10 @@ public class PortableDsuCrafter implements IRecipe {
 		}
 		EndStack=pdsu.copy();
 		PortableDeepStorageUnit ItemPDSU = (PortableDeepStorageUnit) pdsu.getItem();
-		ItemPDSU.changeStoredAmount(EndStack, blocks.stackSize);
 		ItemPDSU.setStack(EndStack, blocks);
+		if(ItemPDSU.addToStoredAmount(EndStack, 1) == 0){
+			return null;
+		}
 		return EndStack;
 	}
 
