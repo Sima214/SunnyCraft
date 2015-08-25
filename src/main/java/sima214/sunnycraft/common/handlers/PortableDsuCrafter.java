@@ -13,8 +13,8 @@ public class PortableDsuCrafter implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting crafting, World world) {
 		boolean hasPDSU=false;
-		ItemBlock stored = null;
-		Item inTable = null;
+		ItemStack stored = null;
+		ItemStack inTable = null;
 		for(int i=0;i<crafting.getSizeInventory();i++){
 			ItemStack curStack=crafting.getStackInSlot(i);
 			if(curStack==null){
@@ -31,11 +31,11 @@ public class PortableDsuCrafter implements IRecipe {
 			else if(item instanceof ItemBlock){
 				if(inTable!=null)
 					return false;
-				inTable=item;
+				inTable=curStack;
 			} else
 				return false;
 		}
-		return hasPDSU&& inTable != null && (stored==null||stored.equals(inTable));
+		return hasPDSU && inTable!=null && (stored==null||stored.isItemEqual(inTable));
 	}
 
 	@Override
@@ -59,9 +59,8 @@ public class PortableDsuCrafter implements IRecipe {
 		EndStack=pdsu.copy();
 		PortableDeepStorageUnit ItemPDSU = (PortableDeepStorageUnit) pdsu.getItem();
 		ItemPDSU.setStack(EndStack, blocks);
-		if(ItemPDSU.addToStoredAmount(EndStack, 1) == 0){
+		if(ItemPDSU.addToStoredAmount(EndStack, 1) == 0)
 			return null;
-		}
 		return EndStack;
 	}
 

@@ -26,6 +26,7 @@ public class Registry {
 	//Configuration
 	private static ConfigHelper config=new ConfigHelper(Constants.SUNCR_ID);
 	public static IntConfigElement portDsu_size=new IntConfigElement("Portable DSU settings", "size", "Sets the max number of items it can hold", Integer.MAX_VALUE);
+	public static IntConfigElement portDsu_tickrate=new IntConfigElement("Portable DSU settings", "tick", "How often should one pdsu check the players's inventory.\nSet to 0 to disable.", 10);
 	public static void init() {
 		GameRegistry.registerBlock(lavaore, lavaore.getUnlocalizedName());
 		lavaore.registerToOreDict("oreLavastone");
@@ -39,7 +40,7 @@ public class Registry {
 
 	public static void loadUp() {
 		SimaCoreMain.registerConfig(config);
-		config.addElements(new IConfigElement[] {portDsu_size});
+		config.addElements(new IConfigElement[] {portDsu_size,portDsu_tickrate});
 		Logger.trace("Registry has been loaded");
 	}
 
