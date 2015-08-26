@@ -12,5 +12,5 @@ public class ClientProxy extends CommonProxy {
 	public void loadRenderers() {
 		MinecraftForgeClient.registerItemRenderer(Registry.portDsu, portDSURenderer);
 	}
-	
+
 }
