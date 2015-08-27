@@ -30,8 +30,8 @@ public class PortableDeepStorageUnit extends ResourceItem {
 	private final static String[] modes=new String[]{
 		"normal",
 		"locked",
-		"output to inventory",
-		"pull from inventory"
+		"output to inventory(locked)",
+		"pull from inventory(locked)"
 	};
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -56,9 +56,9 @@ public class PortableDeepStorageUnit extends ResourceItem {
 					TileEntity tile=world.getTileEntity(x, y, z);
 					if(tile!=null && tile instanceof IInventory){
 						if(itemStack.getItemDamage()==2)
-							return PDSUHelper.pushContents(itemStack,tile,side);
+							return PDSUHelper.pushContents(itemStack,(IInventory) tile,side);
 						else if(itemStack.getItemDamage()==3)
-							return PDSUHelper.pullContents(itemStack,tile,side);
+							return PDSUHelper.pullContents(itemStack,(IInventory) tile,side);
 					}
 				}
 				try {
@@ -135,7 +135,7 @@ public class PortableDeepStorageUnit extends ResourceItem {
 		return finalValue-previous;
 	}
 	public static void clearStoredStack(ItemStack itemStack) {
-		if(itemStack.getItemDamage()!=1){
+		if(itemStack.getItemDamage()==0){
 			itemStack.stackTagCompound.removeTag("id");
 			itemStack.stackTagCompound.removeTag("Count");
 			itemStack.stackTagCompound.removeTag("Damage");
@@ -178,7 +178,7 @@ public class PortableDeepStorageUnit extends ResourceItem {
 		}
 	}
 	/*
-	 * returns true if you need to clean up the stack
+	 * @Returns true if you need to clean up the stack
 	 */
 	public static boolean tryAddStack(ItemStack mainStack,ItemStack containedStack,ItemStack toAdd){
 		if(isItemValid(containedStack, toAdd)){

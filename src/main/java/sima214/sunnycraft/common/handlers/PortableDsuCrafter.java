@@ -50,7 +50,8 @@ public class PortableDsuCrafter implements IRecipe {
 			}
 			else if(item==Items.paper){
 				clear = true;
-			}
+			} else
+				return null;
 		}//For loop end
 		if(clear && blocks==null)
 			return new ItemStack(Registry.portDsu);

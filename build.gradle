@@ -39,7 +39,7 @@ dependencies {
     compile "mcp.mobius.waila:Waila:${config.WAILA_version}_${config.mcversion}:dev"
 }
 
-version = "[${config.mcversion}]-${config.version}."
+version = "[${config.mcversion}]-${config.version}"
 group= "sima214.sunnycraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Sunnycraft"
 

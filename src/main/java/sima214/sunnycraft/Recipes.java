@@ -4,6 +4,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import sima214.core.Constants;
 import sima214.core.common.CraftingHelper;
 import sima214.sunnycraft.common.handlers.PortableDsuCrafter;
@@ -17,5 +18,6 @@ public class Recipes {
 		CraftingHelper.addTEInductionSmelter(4000, new ItemStack(Registry.lavadust), new ItemStack(Items.iron_ingot, 4), new ItemStack(Registry.lavaalloy), null, 0);
 		GameRegistry.addRecipe(new PortableDsuCrafter());
 		RecipeSorter.register(Constants.SUNCR_ID+":PDSUHandler", PortableDsuCrafter.class, Category.SHAPELESS, "");
+		CraftingHelper.registerRecipe(new ShapedOreRecipe(Registry.portDsu, "dyd","eye","dad",'y',"ingotGold",'d',"gemDiamond",'a',"alloyLavastone",'e',Items.ender_eye));
 	}
 }
