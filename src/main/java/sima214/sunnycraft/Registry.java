@@ -10,6 +10,7 @@ import sima214.core.common.WorldGenSimple;
 import sima214.core.common.config.ConfigHelper;
 import sima214.core.common.config.IConfigElement;
 import sima214.core.common.config.IntConfigElement;
+import sima214.sunnycraft.common.blocks.FernSpawner;
 import sima214.sunnycraft.common.blocks.LavaOre;
 import sima214.sunnycraft.common.items.PortableDeepStorageUnit;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -17,6 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Registry {
 	//Blocks
 	public static LavaOre lavaore=new LavaOre(null, 25, 46, "lavastoneore", "lavastone_ore", Block.soundTypeStone, Constants.SUNCR_ID);
+	public static FernSpawner fernspawner=new FernSpawner();
 	//Items
 	public static ResourceItem lavadust=new ResourceItem(64, EnumRarity.uncommon, "lavadust", "lava_dust", Constants.SUNCR_ID,  null);
 	public static ResourceItem lavaalloy=new ResourceItem(64, EnumRarity.uncommon, "lavaalloy", "lava_alloy", Constants.SUNCR_ID,  null);
@@ -30,6 +32,7 @@ public class Registry {
 	public static void init() {
 		GameRegistry.registerBlock(lavaore, lavaore.getUnlocalizedName());
 		lavaore.registerToOreDict("oreLavastone");
+		GameRegistry.registerBlock(fernspawner, fernspawner.getUnlocalizedName());
 		GameRegistry.registerItem(lavadust, lavadust.getUnlocalizedName());
 		lavadust.addToOreDict("dustLavastone");
 		GameRegistry.registerItem(lavaalloy, lavaalloy.getUnlocalizedName());

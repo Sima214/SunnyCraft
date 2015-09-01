@@ -3,12 +3,14 @@ package sima214.sunnycraft;
 import sima214.core.Constants;
 import sima214.core.SimaCoreMain;
 import sima214.sunnycraft.common.CommonProxy;
+import sima214.sunnycraft.common.handlers.SunnyCraftCommands;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLConstructionEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = Constants.SUNCR_ID,name=Constants.SUNCR_NAME,version=Constants.SUNCR_VERSION,dependencies=SimaCoreMain.dependStr)
 public class SunnyCraftMain {
@@ -36,5 +38,10 @@ public class SunnyCraftMain {
 	public void postinit(FMLPostInitializationEvent event)
 	{
 		proxy.loadRenderers();
+	}
+	@Mod.EventHandler
+	public void serverLoad(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new SunnyCraftCommands());
 	}
 }
