@@ -11,7 +11,7 @@ import org.lwjgl.opengl.Util;
 
 import sima214.core.DataTypes;
 import sima214.core.Logger;
-import sima214.core.SimaCoreMain;
+import sima214.core.client.ClientProxy;
 import sima214.core.client.IOUtils;
 import sima214.core.client.IResourcePackChangeListener;
 import sima214.renderer.lwjgl_mc.InterleavedBufferHelper.OpenGLClientStates;
@@ -32,7 +32,7 @@ public class VBOLoader implements IResourcePackChangeListener {
 	int numTriangles;
 	byte state=0x00;//First bit is numTriangles, second is for current type and third for counts if we have gone threw the first face
 	public VBOLoader(ResourceLocation location) {
-		SimaCoreMain.registerPostClientLoad(this);
+		ClientProxy.registerClient(this);
 		this.location=location;
 	}
 	@Override

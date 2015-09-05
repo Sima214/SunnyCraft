@@ -1,5 +1,6 @@
 package sima214.sunnycraft;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.RecipeSorter;
@@ -19,5 +20,6 @@ public class Recipes {
 		GameRegistry.addRecipe(new PortableDsuCrafter());
 		RecipeSorter.register(Constants.SUNCR_ID+":PDSUHandler", PortableDsuCrafter.class, Category.SHAPELESS, "");
 		CraftingHelper.registerRecipe(new ShapedOreRecipe(Registry.portDsu, "dyd","eye","dad",'y',"ingotGold",'d',"gemDiamond",'a',"alloyLavastone",'e',Items.ender_eye));
+		CraftingHelper.registerShapelessRecipe(new ItemStack(Registry.fernspawner), Registry.lavaalloy,Blocks.sapling);
 	}
 }

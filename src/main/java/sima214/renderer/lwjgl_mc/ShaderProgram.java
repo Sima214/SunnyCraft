@@ -10,7 +10,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.OpenGLException;
 
-import sima214.core.SimaCoreMain;
+import sima214.core.Logger;
+import sima214.core.client.ClientProxy;
 import sima214.core.client.IOUtils;
 import sima214.core.client.IResourcePackChangeListener;
 
@@ -22,7 +23,7 @@ public class ShaderProgram implements IResourcePackChangeListener {
 	private final Shader frag=new Shader(ShaderTypes.FRAGMENT);
 	public ShaderProgram(ResourceLocation loc) {
 		this.location=loc;
-		SimaCoreMain.registerPostClientLoad(this);
+		ClientProxy.registerClient(this);
 	}
 	public void addUniform(String name){
 		uniforms.put(name, new UniformHelper(this));
@@ -46,6 +47,7 @@ public class ShaderProgram implements IResourcePackChangeListener {
 		ARBShaderObjects.glLinkProgramARB(this.id);
 		handleInfo();
 		initUniforms();
+		Logger.info("Succesfully loaded, compiled and linked: "+location.toString());
 	}
 	private void handleInfo(){
 		if(ARBShaderObjects.glGetObjectParameteriARB(this.id, ARBShaderObjects.GL_OBJECT_LINK_STATUS_ARB) == GL11.GL_FALSE || ARBShaderObjects.glGetObjectParameteriARB(this.id, ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE)

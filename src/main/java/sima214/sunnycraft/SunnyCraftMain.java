@@ -3,6 +3,7 @@ package sima214.sunnycraft;
 import sima214.core.Constants;
 import sima214.core.SimaCoreMain;
 import sima214.sunnycraft.common.CommonProxy;
+import sima214.sunnycraft.common.entities.EntityModFireball;
 import sima214.sunnycraft.common.handlers.SunnyCraftCommands;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -11,6 +12,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 @Mod(modid = Constants.SUNCR_ID,name=Constants.SUNCR_NAME,version=Constants.SUNCR_VERSION,dependencies=SimaCoreMain.dependStr)
 public class SunnyCraftMain {
@@ -30,6 +32,7 @@ public class SunnyCraftMain {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		EntityRegistry.registerModEntity(EntityModFireball.class, "fireball", 0, this, 128, 1, true);
 		Registry.init();
 		Recipes.init(event);
 	}

@@ -2,7 +2,6 @@ package sima214.core;
 
 import java.util.ArrayList;
 
-import sima214.core.client.IResourcePackChangeListener;
 import sima214.core.common.CommonProxy;
 import sima214.core.common.OreGenHelper;
 import sima214.core.common.WorldGenSimple;
@@ -50,9 +49,6 @@ public class SimaCoreMain {
 	public static void registerConfig(ConfigHelper config)
 	{
 		SimaCoreMain.configs.add(config);
-	}
-	public static void registerPostClientLoad(IResourcePackChangeListener obj){
-		proxy.registerClient(obj);
 	}
 	public static void registerSimpleOre(WorldGenSimple simple)
 	{

@@ -9,10 +9,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 
 public class CraftingHelper {
-	public static void registerShapedRecipe(ItemStack output, Object params){
+	public static void registerShapedRecipe(ItemStack output, Object... params){
 		GameRegistry.addShapedRecipe(output, params);
 	};
-	public static void registerShapelessRecipe(ItemStack output, Object params){
+	public static void registerShapelessRecipe(ItemStack output, Object... params){
 		GameRegistry.addShapelessRecipe(output, params);
 	};
 	public static void registerRecipe(IRecipe recipe){
