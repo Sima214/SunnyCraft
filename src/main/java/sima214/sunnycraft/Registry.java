@@ -8,6 +8,7 @@ import sima214.core.SimaCoreMain;
 import sima214.core.common.ResourceItem;
 import sima214.core.common.WorldGenSimple;
 import sima214.core.common.config.ConfigHelper;
+import sima214.core.common.config.FloatConfigElement;
 import sima214.core.common.config.IConfigElement;
 import sima214.core.common.config.IntConfigElement;
 import sima214.sunnycraft.common.blocks.FernSpawner;
@@ -29,6 +30,11 @@ public class Registry {
 	private static ConfigHelper config=new ConfigHelper(Constants.SUNCR_ID);
 	public static IntConfigElement portDsu_size=new IntConfigElement("Portable DSU settings", "size", "Sets the max number of items it can hold", Integer.MAX_VALUE);
 	public static IntConfigElement portDsu_tickrate=new IntConfigElement("Portable DSU settings", "tick", "How often should one pdsu check the players's inventory.\nSet to 0 to disable.", 10);
+	public static IntConfigElement fireball_health=new IntConfigElement("Fireball Settings", "startHealth", "The health that a new spawned fireball has", 20);
+	public static IntConfigElement fireball_maxHealth=new IntConfigElement("Fireball Settings", "maxHealth", "The max health one fireball could reach", 100);
+	public static IntConfigElement fireball_hit=new IntConfigElement("Fireball Settings", "hit", "In ticks", 30);
+	public static IntConfigElement fireball_hitAfter=new IntConfigElement("Fireball Settings", "hitAfer", "In ticks", 10);
+	public static FloatConfigElement fireball_damageRequired=new FloatConfigElement("Fireball Settings", "damageRequired", 5f);
 	public static void init() {
 		GameRegistry.registerBlock(lavaore, lavaore.getUnlocalizedName());
 		lavaore.registerToOreDict("oreLavastone");
@@ -43,7 +49,7 @@ public class Registry {
 
 	public static void loadUp() {
 		SimaCoreMain.registerConfig(config);
-		config.addElements(new IConfigElement[] {portDsu_size,portDsu_tickrate});
+		config.addElements(new IConfigElement[] {portDsu_size, portDsu_tickrate, fireball_health,fireball_maxHealth,fireball_hit,fireball_hitAfter,fireball_damageRequired});
 		Logger.trace("Registry has been loaded");
 	}
 

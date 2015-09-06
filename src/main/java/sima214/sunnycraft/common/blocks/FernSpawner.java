@@ -73,7 +73,9 @@ public class FernSpawner extends ResourceBlock {
 				if(world.isRemote){
 					player.addChatMessage(new ChatComponentText("You feel like something is coming..."));//Temporary message used to debug.
 				}
-				world.spawnEntityInWorld(new EntityModFireball(world, x, y+1, z));
+				else{
+					world.spawnEntityInWorld(new EntityModFireball(world, x+0.25f, y+0.5f, z+0.25f));
+				}
 				curMeta=-1;
 			}
 			world.setBlockMetadataWithNotify(x, y, z, curMeta+1, 3);

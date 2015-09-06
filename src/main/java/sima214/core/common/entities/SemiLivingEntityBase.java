@@ -2,6 +2,8 @@ package sima214.core.common.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class SemiLivingEntityBase extends Entity {
@@ -11,6 +13,7 @@ public class SemiLivingEntityBase extends Entity {
 	private int hitTimer;//TODO optimize their size
 	private int health;
 	private int deathTimer;
+	protected MotionHelper moveHelper=new MotionHelper(this);
 	public SemiLivingEntityBase(World world) {
 		super(world);
 	}
@@ -31,6 +34,7 @@ public class SemiLivingEntityBase extends Entity {
 				}
 			}
 		}
+		moveHelper.onUpdate(worldObj.isRemote);
 	}
 	//Handling for values
 	//Client syncing, persistency
@@ -88,5 +92,17 @@ public class SemiLivingEntityBase extends Entity {
 	@Override
 	public boolean canBeCollidedWith() {
 		return true;
+	}
+	@Override
+	public float getCollisionBorderSize() {
+		return 0.1f;
+	}
+	@Override
+	public Vec3 getLookVec() {
+		float f1 = MathHelper.cos(-this.rotationYaw * 0.017453292F - (float)Math.PI);
+		float f2 = MathHelper.sin(-this.rotationYaw * 0.017453292F - (float)Math.PI);
+		float f3 = -MathHelper.cos(-this.rotationPitch * 0.017453292F);
+		float f4 = MathHelper.sin(-this.rotationPitch * 0.017453292F);
+		return Vec3.createVectorHelper(f2 * f3, f4, f1 * f3);
 	}
 }
