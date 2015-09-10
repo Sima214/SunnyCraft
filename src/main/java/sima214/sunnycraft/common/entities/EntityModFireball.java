@@ -62,7 +62,7 @@ public class EntityModFireball extends SemiLivingEntityBase {
 				motionX=vec.xCoord*0.1;
 				motionY=vec.yCoord*0.1;
 				motionZ=vec.zCoord*0.1;
-
+				attackHelper.setTarget(player);
 			}
 			catch(Exception e){
 				Logger.exception("Debug", e);

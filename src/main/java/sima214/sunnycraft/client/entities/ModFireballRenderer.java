@@ -31,7 +31,7 @@ public class ModFireballRenderer extends Render {
 		GL11.glRotatef(time%360, 0.5f, 0.1f, 0.3f);
 		GL11.glScalef(scale, scale, scale);
 		GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		shader.activate();
 		shader.getUniform(UNIFORM_TIME).update(time);//Hope it doesn't overflow
 		shader.getUniform(UNIFORM_TIMERS).update(entity.getDeathTimer()/100f, entity.getHitTimer()/20f,0f);

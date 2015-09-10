@@ -14,6 +14,7 @@ public class SemiLivingEntityBase extends Entity {
 	private int health;
 	private int deathTimer;
 	protected MotionHelper moveHelper=new MotionHelper(this);
+	protected AttackHelper attackHelper=new AttackHelper(this);
 	public SemiLivingEntityBase(World world) {
 		super(world);
 	}
@@ -35,6 +36,7 @@ public class SemiLivingEntityBase extends Entity {
 			}
 		}
 		moveHelper.onUpdate(worldObj.isRemote);
+		attackHelper.onUpdate(worldObj.isRemote);
 	}
 	//Handling for values
 	//Client syncing, persistency
