@@ -15,6 +15,7 @@ public class SemiLivingEntityBase extends Entity {
 	private int deathTimer;
 	protected MotionHelper moveHelper=new MotionHelper(this);
 	protected AttackHelper attackHelper=new AttackHelper(this);
+	public boolean isToDie;
 	public SemiLivingEntityBase(World world) {
 		super(world);
 	}
@@ -28,6 +29,7 @@ public class SemiLivingEntityBase extends Entity {
 			}
 			if(getHealth()<=0)
 			{
+				isToDie=true;
 				setDeathTimer(getDeathTimer()-1);
 				if(getDeathTimer() <= 0)
 				{
@@ -45,6 +47,9 @@ public class SemiLivingEntityBase extends Entity {
 		dataWatcher.addObject(2, Integer.valueOf(0));
 		dataWatcher.addObject(3, Integer.valueOf(0));
 		dataWatcher.addObject(4, Integer.valueOf(0));
+		dataWatcher.addObject(5, Float.valueOf(0));
+		dataWatcher.addObject(6, Float.valueOf(0));
+		dataWatcher.addObject(7, Float.valueOf(0));
 	}
 	public int getHealth(){
 		return worldObj.isRemote?dataWatcher.getWatchableObjectInt(2):health;
@@ -73,6 +78,34 @@ public class SemiLivingEntityBase extends Entity {
 	public int getDeathTimer() {
 		return worldObj.isRemote?dataWatcher.getWatchableObjectInt(4):deathTimer;
 	}
+	//Motion
+	public void setMotionX(double newValue){
+		if(!worldObj.isRemote){
+			dataWatcher.updateObject(5, Float.valueOf((float)newValue));
+			this.motionX=newValue;
+		}
+	}
+	public double getMotionX(){
+		return worldObj.isRemote ? dataWatcher.getWatchableObjectFloat(5) : motionX;
+	}
+	public void setMotionY(double newValue){
+		if(!worldObj.isRemote){
+			dataWatcher.updateObject(6, Float.valueOf((float)newValue));
+			this.motionY=newValue;
+		}
+	}
+	public double getMotionY(){
+		return worldObj.isRemote ? dataWatcher.getWatchableObjectFloat(6) : motionY;
+	}
+	public void setMotionZ(double newValue){
+		if(!worldObj.isRemote){
+			dataWatcher.updateObject(7, Float.valueOf((float)newValue));
+			this.motionZ=newValue;
+		}
+	}
+	public double getMotionZ(){
+		return worldObj.isRemote ? dataWatcher.getWatchableObjectFloat(7) : motionZ;
+	}
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
 		if(nbt.hasKey(HEALTH_TAG)){
@@ -94,10 +127,6 @@ public class SemiLivingEntityBase extends Entity {
 	@Override
 	public boolean canBeCollidedWith() {
 		return true;
-	}
-	@Override
-	public float getCollisionBorderSize() {
-		return 0.1f;
 	}
 	@Override
 	public Vec3 getLookVec() {

@@ -12,23 +12,27 @@ public class MotionHelper {
 	protected Random rand=new Random();
 	protected float targetPitch;
 	protected float targetYaw;
-	public int timer;
+	protected int timer;
+	protected boolean hasBeenHit=false;
+	private final static float min_step=1f;
 	public MotionHelper(SemiLivingEntityBase semiLivingEntityBase) {
 		this.host=semiLivingEntityBase;
 		resetDirection();
 	}
 	public void onUpdate(boolean isRemote){
 		if(host.getHitTimer()>1){
-			host.motionX*=0.6d;
-			host.motionY*=0.6d;
-			host.motionZ*=0.6d;
+			host.motionX*=0.8d;
+			host.motionY*=0.8d;
+			host.motionZ*=0.8d;
+			hasBeenHit=true;
 		}
-		else if(host.getHitTimer()==1){
-			resetDirection();
+		else if(host.getHitTimer()==1 && (!host.isToDie)){
+			reset();
+			hasBeenHit=false;
 		}
 		else
 		{
-			if(timer<=0){
+			if(timer<=0 && (!isRemote) && (!host.isToDie)){
 				resetDirection();
 				host.rotationPitch=this.targetPitch;
 				host.rotationYaw=this.targetYaw;
@@ -38,13 +42,21 @@ public class MotionHelper {
 				timer--;
 			}
 		}
-		host.moveEntity(host.motionX, host.motionY, host.motionZ);
+		if(hasBeenHit || host.isToDie){
+			host.moveEntity(host.motionX, host.motionY, host.motionZ);
+		}
+		else{
+			host.moveEntity(host.getMotionX(), host.getMotionY(), host.getMotionZ());
+		}
+	}
+	public void reset() {
+		timer=-1;
 	}
 	protected void setHostMotionByRotation() {
 		Vec3 vec=host.getLookVec();
-		host.motionX=vec.xCoord*0.2;
-		host.motionY=vec.yCoord*0.2;
-		host.motionZ=vec.zCoord*0.2;
+		host.setMotionX(vec.xCoord*0.1);
+		host.setMotionY(vec.yCoord*0.1);
+		host.setMotionZ(vec.zCoord*0.1);
 	}
 	protected void resetDirection() {
 		timer=rand.nextInt(100);
