@@ -6,7 +6,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class SemiLivingEntityBase extends Entity {
+public abstract class SemiLivingEntityBase extends Entity {
 	protected final String HEALTH_TAG="health";
 	protected final String DEATH_TAG="death";
 	protected final String HIT_TAG="hit";
@@ -15,7 +15,6 @@ public class SemiLivingEntityBase extends Entity {
 	private int deathTimer;
 	protected MotionHelper moveHelper=new MotionHelper(this);
 	protected AttackHelper attackHelper=new AttackHelper(this);
-	public boolean isToDie;
 	public SemiLivingEntityBase(World world) {
 		super(world);
 	}
@@ -29,7 +28,6 @@ public class SemiLivingEntityBase extends Entity {
 			}
 			if(getHealth()<=0)
 			{
-				isToDie=true;
 				setDeathTimer(getDeathTimer()-1);
 				if(getDeathTimer() <= 0)
 				{
@@ -105,6 +103,26 @@ public class SemiLivingEntityBase extends Entity {
 	}
 	public double getMotionZ(){
 		return worldObj.isRemote ? dataWatcher.getWatchableObjectFloat(7) : motionZ;
+	}
+	public boolean isToDie(){
+		return getHealth()<=0;
+	}
+	public void setVelocity(Vec3 vec,final float mult) {
+		setVelocity(vec.xCoord*mult, vec.yCoord*mult, vec.zCoord*mult);
+	}
+	/*
+	 * Should be used only at the server side
+	 */
+	public void setVelocity(final float mult) {
+		setMotionX(this.motionX*mult);
+		setMotionY(this.motionY*mult);
+		setMotionZ(this.motionZ*mult);
+	}
+	@Override
+	public void setVelocity(double motionX, double motionY, double motionZ) {
+		setMotionX(motionX);
+		setMotionY(motionY);
+		setMotionZ(motionZ);
 	}
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {

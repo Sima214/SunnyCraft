@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import sima214.core.Logger;
 import sima214.core.common.entities.SemiLivingEntityBase;
@@ -21,6 +20,13 @@ public class EntityModFireball extends SemiLivingEntityBase {
 	public EntityModFireball(World world, double x, double y, double z) {
 		this(world);
 		this.setPosition(x, y, z);
+	}
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		if(this.posY>128){
+			this.setDead();
+		}
 	}
 	@Override
 	protected void fall(float distance) {}
@@ -58,10 +64,7 @@ public class EntityModFireball extends SemiLivingEntityBase {
 			try{
 				EntityPlayer player=(EntityPlayer) damageSource.getEntity();
 				player.addChatMessage(new ChatComponentText("Current health: "+getHealth()));
-				Vec3 vec=player.getLookVec();
-				motionX=vec.xCoord*0.1;
-				motionY=vec.yCoord*0.1;
-				motionZ=vec.zCoord*0.1;
+				setVelocity(player.getLookVec(), 0.2f);
 				attackHelper.setTarget(player);
 			}
 			catch(Exception e){
